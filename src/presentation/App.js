@@ -1,27 +1,9 @@
 import React from "react";
-//import logo from "./assets/logo.svg";
+import Navbar from "./components/Navbar";
 import "./App.scss";
 
-const App = props => {
-    return (
-        // <div className="App">
-        //     <header className="App-header">
-        //         <img src={logo} className="App-logo" alt="logo" />
-        //         <p>
-        //             Edit <code>src/App.js</code> and save to reload.
-        //         </p>
-        //         <a
-        //             className="App-link"
-        //             href="https://reactjs.org"
-        //             target="_blank"
-        //             rel="noopener noreferrer"
-        //         >
-        //             Learn React
-        //         </a>
-        //     </header>
-        // </div>
-        <div>HOME</div>
-    );
-};
+function App() {
+    return <Navbar />;
+}
 
 export default App;

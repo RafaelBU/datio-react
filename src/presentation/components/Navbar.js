@@ -3,8 +3,8 @@ import {NavLink, withRouter} from "react-router-dom";
 
 let Navbar = props => {
     const getNavLinkClass = path => {
-        console.log("path es ", path);
-        console.log("props es ", props);
+        // console.log("path es ", path);
+        // console.log("props es ", props);
         return props.location.pathname === path
             ? "nav-item active"
             : "nav-item";
@@ -118,7 +118,7 @@ let Navbar = props => {
                                 color: "blue"
                             }}
                         >
-                            Data
+                            Usuarios
                         </NavLink>
                     </li>
                     <li
@@ -131,7 +131,7 @@ let Navbar = props => {
                                 color: "blue"
                             }}
                         >
-                            Form
+                            Formulario de contacto
                         </NavLink>
                     </li>
                 </ul>
