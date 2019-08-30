@@ -6,9 +6,9 @@ import {store} from "./presentation/my-redux/my-redux";
 import {bindActionCreators} from "redux";
 import "./index.scss";
 import App from "./presentation/App";
-import DataTable from "./presentation/components/dataTable";
-import DataForm from "./presentation/components/dataForm";
-import NotFound from "./presentation/components/404";
+import DataTable from "./presentation/components/users/dataTable";
+import DataForm from "./presentation/components/form/dataForm";
+import NotFound from "./presentation/components/404/404";
 import * as serviceWorker from "./presentation/serviceWorker";
 
 function routing() {
@@ -18,7 +18,7 @@ function routing() {
                 <App />
                 <Switch>
                     <Route exact path="/" component={DataTable} />
-                    <Route path="/table" component={DataTable} />
+                    <Route path="/users" component={DataTable} />
                     <Route path="/form" component={DataForm} />
                     <Route component={NotFound} />
                 </Switch>

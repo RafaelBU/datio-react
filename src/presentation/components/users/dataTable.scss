@@ -1,8 +1,16 @@
+.title-style {
+    text-align: center;
+    margin: 40px;
+}
+
 .table-container {
     overflow-y: scroll;
     height: 600px;
     thead th {
         position: sticky;
         top: 0;
+    }
+    .align-element {
+        vertical-align: middle;
     }
 }

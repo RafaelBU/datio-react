@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import "./dataForm.scss";
 
 function DataForm() {
     const [name, setName] = useState("");
@@ -12,16 +13,21 @@ function DataForm() {
         console.log("apellidos es ", lastName);
         console.log("email ", email);
         console.log("comments ", comments);
+        alert(
+            "información enviada con éxito ",
+            name
+            // lastName,
+            // email,
+            // comments
+        );
     };
 
     return (
         <div className="container-fluid">
-            <h1 style={{textAlign: "center", margin: 40}}>
-                Formulario de contacto
-            </h1>
+            <h1 className="title-style">Formulario de contacto</h1>
             <form>
                 <div className="form-group">
-                    <label for="nameInput">Nombre</label>
+                    <label htmlFor="nameInput">Nombre</label>
                     <input
                         type="text"
                         className="form-control"
@@ -32,7 +38,7 @@ function DataForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label for="nameInput">Apellidos</label>
+                    <label htmlFor="nameInput">Apellidos</label>
                     <input
                         type="text"
                         className="form-control"
@@ -43,7 +49,7 @@ function DataForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label for="emailInput">Email</label>
+                    <label htmlFor="emailInput">Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -54,7 +60,7 @@ function DataForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label for="textArea">Añade tus comentarios</label>
+                    <label htmlFor="textArea">Añade tus comentarios</label>
                     <textarea
                         className="form-control"
                         id="textArea"
@@ -67,10 +73,51 @@ function DataForm() {
                     className="btn btn-primary"
                     type="submit"
                     onClick={e => showInformation(e)}
+                    data-toggle="modal"
+                    data-target="#exampleModal"
                 >
                     Enviar información
                 </button>
             </form>
+            {/* <div
+                className="modal fade show"
+                id="exampleModal"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                                Modal title
+                            </h5>
+                            <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">...</div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button type="button" className="btn btn-primary">
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
         </div>
     );
 }

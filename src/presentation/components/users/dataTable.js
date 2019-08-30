@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {actions} from "../my-redux/my-redux";
-import Loading from "./loading";
+import {actions} from "../../my-redux/my-redux";
+import Loading from "../loading/loading";
 import "./dataTable.scss";
 
 function DataTable(props) {
@@ -27,9 +27,7 @@ function DataTable(props) {
 
     return (
         <div className="table-responsive">
-            <h1 style={{textAlign: "center", margin: 40}}>
-                Listado de usuarios
-            </h1>
+            <h1 className="title-style">Listado de usuarios</h1>
             {props.loadDataUser ? (
                 <div
                     className="table-container"
@@ -52,7 +50,12 @@ function DataTable(props) {
                             {props.dataUser.map((user, index) => {
                                 return (
                                     <tr key={index}>
-                                        <th scope="row">{user.id}</th>
+                                        <th
+                                            scope="row"
+                                            className="align-element"
+                                        >
+                                            {user.id}
+                                        </th>
                                         <td>
                                             <img
                                                 src={user.avatar}
@@ -61,9 +64,15 @@ function DataTable(props) {
                                                 alt="Avatar"
                                             />
                                         </td>
-                                        <td>{user.first_name}</td>
-                                        <td>{user.last_name}</td>
-                                        <td>{user.email}</td>
+                                        <td className="align-element">
+                                            {user.first_name}
+                                        </td>
+                                        <td className="align-element">
+                                            {user.last_name}
+                                        </td>
+                                        <td className="align-element">
+                                            {user.email}
+                                        </td>
                                     </tr>
                                 );
                             })}

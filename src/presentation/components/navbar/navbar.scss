@@ -1,0 +1,8 @@
+.button-link {
+    margin-top: 2px;
+    background-color: inherit;
+    border: none;
+    &:focus {
+        outline: 0;
+    }
+}
