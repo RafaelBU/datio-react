@@ -6,6 +6,7 @@ import {store} from "./presentation/my-redux/my-redux";
 import {bindActionCreators} from "redux";
 import "./index.scss";
 import App from "./presentation/App";
+import Home from "./presentation/components/home/home";
 import DataTable from "./presentation/components/users/dataTable";
 import DataForm from "./presentation/components/form/dataForm";
 import NotFound from "./presentation/components/404/404";
@@ -17,7 +18,7 @@ function routing() {
             <div>
                 <App />
                 <Switch>
-                    <Route exact path="/" component={DataTable} />
+                    <Route exact path="/" component={Home} />
                     <Route path="/users" component={DataTable} />
                     <Route path="/form" component={DataForm} />
                     <Route component={NotFound} />
@@ -28,12 +29,7 @@ function routing() {
 }
 
 const AppConnect = connect(
-    (appState, ownProps) => ({
-        // appState: appState,
-        // scene: appState.app.scene,
-        // user: appState.users.user,
-        // error: appState.error
-    }),
+    (appState, ownProps) => ({}),
     dispatch => bindActionCreators({}, dispatch)
 )(routing);
 

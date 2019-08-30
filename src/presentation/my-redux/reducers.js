@@ -3,6 +3,7 @@ import * as actions from "./actions.js";
 
 const APP_DEFAULT = {
     dataUser: [],
+    lastData: [],
     loadDataUser: false
 };
 const app = (state = APP_DEFAULT, action) => {
@@ -11,12 +12,8 @@ const app = (state = APP_DEFAULT, action) => {
             return {
                 ...state,
                 dataUser: state.dataUser.concat(action.data),
+                lastData: action.data,
                 loadDataUser: true
-            };
-        case actions.CLEAR_DATA_DISPATCH:
-            return {
-                ...state,
-                loadDataUser: action.isLoad
             };
         default:
             return state;

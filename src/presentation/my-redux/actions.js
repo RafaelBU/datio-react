@@ -12,7 +12,6 @@ export const error = error => {
 
 export const GET_DATA_DISPATCH = "GET_DATA_DISPATCH";
 export const SEND_DATA_DISPATCH = "SEND_DATA_DISPATCH";
-export const CLEAR_DATA_DISPATCH = "CLEAR_DATA_DISPATCH";
 
 export const getDataDispatch = page => {
     return {
@@ -25,13 +24,6 @@ export const sendDataDispatch = data => {
     return {
         type: SEND_DATA_DISPATCH,
         data
-    };
-};
-
-export const clearDataDispatch = () => {
-    return {
-        type: CLEAR_DATA_DISPATCH,
-        isLoad: false
     };
 };
 

@@ -3,24 +3,26 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {actions} from "../../my-redux/my-redux";
 import Loading from "../loading/loading";
+import Avatar from "react-avatar";
 import "./dataTable.scss";
 
 function DataTable(props) {
-    const {getDataDispatch, clearDataDispatch} = props;
+    const {getDataDispatch, loadDataUser} = props;
     const [page, setPage] = useState(1);
     const [refContainer, setRefContainer] = useState(null);
 
     useEffect(() => {
-        getDataDispatch(page);
-        return () => clearDataDispatch();
-    }, [getDataDispatch, page, clearDataDispatch]);
+        if (!loadDataUser || page > 1) {
+            getDataDispatch(page);
+        }
+    }, [getDataDispatch, page, loadDataUser]);
 
     const onScroll = () => {
         const pageLimit =
             refContainer.scrollHeight - refContainer.scrollTop ===
             refContainer.clientHeight;
 
-        if (pageLimit && page < 2) {
+        if (pageLimit && props.lastData.length > 0) {
             setPage(page + 1);
         }
     };
@@ -57,11 +59,10 @@ function DataTable(props) {
                                             {user.id}
                                         </th>
                                         <td>
-                                            <img
+                                            <Avatar
                                                 src={user.avatar}
-                                                width={70}
-                                                height={70}
-                                                alt="Avatar"
+                                                size={70}
+                                                round={true}
                                             />
                                         </td>
                                         <td className="align-element">
@@ -80,25 +81,24 @@ function DataTable(props) {
                     </table>
                 </div>
             ) : (
-                <Loading />
+                <Loading isActive={page === 1} />
             )}
         </div>
     );
 }
 
 const getDataDispatch = actions.getDataDispatch;
-const clearDataDispatch = actions.clearDataDispatch;
 
 export default connect(
     (appState, ownProps) => ({
         dataUser: appState.app.dataUser,
+        lastData: appState.app.lastData,
         loadDataUser: appState.app.loadDataUser
     }),
     dispatch =>
         bindActionCreators(
             {
-                getDataDispatch,
-                clearDataDispatch
+                getDataDispatch
             },
             dispatch
         )

@@ -1,66 +1,74 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import Modal from "react-responsive-modal";
 import "./dataForm.scss";
 
 function DataForm() {
+    const [open, setOpen] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [comments, setComments] = useState("");
 
+    const onCloseModal = () => {
+        setOpen(false);
+    };
+
     const showInformation = e => {
         e.preventDefault();
-        console.log("name ", name);
-        console.log("apellidos es ", lastName);
-        console.log("email ", email);
-        console.log("comments ", comments);
-        alert(
-            "información enviada con éxito ",
-            name
-            // lastName,
-            // email,
-            // comments
-        );
+        setOpen(true);
     };
+
+    useEffect(() => {
+        const re = /\S+@\S+\.\S+/;
+        const condition =
+            name === "" ||
+            lastName === "" ||
+            email === "" ||
+            comments === "" ||
+            !re.test(email);
+        setDisabled(condition);
+    }, [name, lastName, email, comments]);
 
     return (
         <div className="container-fluid">
             <h1 className="title-style">Formulario de contacto</h1>
             <form>
                 <div className="form-group">
-                    <label htmlFor="nameInput">Nombre</label>
+                    <label htmlFor="nameInput"> * Nombre</label>
                     <input
                         type="text"
                         className="form-control"
                         id="nameInput"
-                        placeholder="Introduce tu nombre"
+                        placeholder="Ejemplo: Pepe"
                         onChange={event => setName(event.target.value)}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="nameInput">Apellidos</label>
+                    <label htmlFor="nameInput"> * Apellido</label>
                     <input
                         type="text"
                         className="form-control"
                         id="lastNameInput"
-                        placeholder="Introduce tus apellidos"
+                        placeholder="Ejemplo: Pérez"
                         onChange={event => setLastName(event.target.value)}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="emailInput">Email</label>
+                    <label htmlFor="emailInput"> * Email</label>
                     <input
                         type="email"
                         className="form-control"
                         id="emailInput"
-                        placeholder="Introduce tu email"
+                        placeholder="Ejemplo: pepe@mail.com"
                         onChange={event => setEmail(event.target.value)}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="textArea">Añade tus comentarios</label>
+                    <label htmlFor="textArea"> * Añade tus comentarios</label>
                     <textarea
                         className="form-control"
                         id="textArea"
@@ -69,55 +77,37 @@ function DataForm() {
                         required
                     ></textarea>
                 </div>
-                <button
-                    className="btn btn-primary"
-                    type="submit"
-                    onClick={e => showInformation(e)}
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                >
-                    Enviar información
-                </button>
-            </form>
-            {/* <div
-                className="modal fade show"
-                id="exampleModal"
-                tabIndex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">
-                                Modal title
-                            </h5>
-                            <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">...</div>
-                        <div className="modal-footer">
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                data-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                            <button type="button" className="btn btn-primary">
-                                Save changes
-                            </button>
-                        </div>
+                {disabled ? (
+                    <div className="button-container">
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                            disabled
+                        >
+                            Enviar información
+                        </button>
                     </div>
-                </div>
-            </div> */}
+                ) : (
+                    <div className="button-container">
+                        <button
+                            className="btn btn-primary"
+                            type="submit"
+                            onClick={e => showInformation(e)}
+                        >
+                            Enviar información
+                        </button>
+                    </div>
+                )}
+            </form>
+            <Modal open={open} onClose={onCloseModal} center>
+                <h2>Información enviada</h2>
+                <p>
+                    Hola <span className="span-style">{name}</span>{" "}
+                    <span className="span-style">{lastName}</span>, tu mensaje
+                    ha sido enviado, recibirás respuesta en tu correo{" "}
+                    <span className="span-style">{email}</span>
+                </p>
+            </Modal>
         </div>
     );
 }

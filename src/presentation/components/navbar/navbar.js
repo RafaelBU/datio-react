@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {NavLink, withRouter} from "react-router-dom";
+import home from "../../assets/home.png";
 import "./navbar.scss";
 
 let Navbar = props => {
@@ -18,10 +19,12 @@ let Navbar = props => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg bg-primary navbar-dark">
-            <a className="navbar-brand" href="/">
-                Menú
-            </a>
+        <nav className="navbar sticky-top navbar-expand-lg bg-primary navbar-dark">
+            <NavLink to="/">
+                <button className="navbar-brand button-link">
+                    <img src={home} alt="home" />
+                </button>
+            </NavLink>
             <button
                 className="navbar-toggler"
                 type="button"
@@ -41,7 +44,10 @@ let Navbar = props => {
                         style={{padding: 10}}
                     >
                         <NavLink to="/users">
-                            <button className="nav-link button-link">
+                            <button
+                                className="nav-link button-link"
+                                onClick={() => toogleMenu()}
+                            >
                                 Usuarios
                             </button>
                         </NavLink>
@@ -51,7 +57,10 @@ let Navbar = props => {
                         style={{padding: 10}}
                     >
                         <NavLink to="/form">
-                            <button className="nav-link button-link">
+                            <button
+                                className="nav-link button-link"
+                                onClick={() => toogleMenu()}
+                            >
                                 Formulario de contacto
                             </button>
                         </NavLink>
